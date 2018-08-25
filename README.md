@@ -65,10 +65,6 @@ You should see something similar to this:
    9:            Apple_UNIX_SVR2                         1.3 GB     disk5s9
 ```
 
-
-
-
-
 * Example:
 ```
 $ diskutil list
@@ -104,3 +100,29 @@ Verify it:
    8:            Apple_UNIX_SVR2                         248.6 MB   disk5s8
    9:            Apple_UNIX_SVR2                         1.3 GB     disk5s9```
 
+# A/UX setup
+
+# Logins
+User: root
+Password: password
+
+You should change these, or maybe just not connect a 25 year old OS to any insecure network.
+
+I recommend creating your own user. You will need it if you care to ssh into your A/UX system.
+
+# Networking
+* Determine a static IP for your system
+
+* Run "newconfig" as root. Follow the prompts, and enter your system's IP info when asked.
+* Reboot.
+
+* Change it in the following files:
+  * at the end of /etc/networks
+  * /etc/hosts
+  * /etc/NETADDRS
+
+* Determine your default gateway's IP
+* Change it in /etc/rc, for the "route add default" entry
+
+* Determine your nameserver
+* Change it in /etc/resolv.conf
