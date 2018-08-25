@@ -46,9 +46,12 @@ You'll set the output file to be "r" plus the name of the SD card. This tells OS
 ```sudo dd if=aux_3.1.1_working.img of=/dev/r<your disk name>```
 
 * Verify the SD card's partitioning
+
 ```diskutil list```
+
 You should see something similar to this:
-```/dev/disk5 (external, physical):
+```
+/dev/disk5 (external, physical):
    #:                       TYPE NAME                    SIZE       IDENTIFIER
    0:     Apple_partition_scheme                        *7.9 GB     disk5
    1:        Apple_partition_map                         32.3 KB    disk5s1
@@ -59,7 +62,8 @@ You should see something similar to this:
    6:                  Apple_HFS MacPartition            16.8 MB    disk5s6
    7:            Apple_UNIX_SVR2                         536.9 MB   disk5s7
    8:            Apple_UNIX_SVR2                         248.6 MB   disk5s8
-   9:            Apple_UNIX_SVR2                         1.3 GB     disk5s9```
+   9:            Apple_UNIX_SVR2                         1.3 GB     disk5s9
+```
 
 
 
