@@ -98,7 +98,9 @@ Verify it:
    6:                  Apple_HFS MacPartition            16.8 MB    disk5s6
    7:            Apple_UNIX_SVR2                         536.9 MB   disk5s7
    8:            Apple_UNIX_SVR2                         248.6 MB   disk5s8
-   9:            Apple_UNIX_SVR2                         1.3 GB     disk5s9```
+   9:            Apple_UNIX_SVR2                         1.3 GB     disk5s9
+
+```
 
 # A/UX setup
 
