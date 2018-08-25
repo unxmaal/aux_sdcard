@@ -1,0 +1,352 @@
+<SCSI2SD>
+<BoardConfig>
+	<unitAttention>true</unitAttention>
+	<parity>false</parity>
+	<!-- ********************************************************
+	Only set to true when using with a fast SCSI2 host
+ 	controller. This can cause problems with older/slower
+	hardware.
+	********************************************************* -->
+	<enableScsi2>false</enableScsi2>
+	<!-- ********************************************************
+	Setting to 'true' will result in increased performance at the
+	cost of lower noise immunity.
+	Only set to true when using short cables with only 1 or two
+	devices. This should remain off when using external SCSI1 DB25
+	cables.
+	********************************************************* -->
+	<disableGlitchFilter>true</disableGlitchFilter>
+	<enableCache>false</enableCache>
+	<enableDisconnect>false</enableDisconnect>
+	<!-- ********************************************************
+	Respond to very short duration selection attempts. This supports
+	non-standard hardware, but is generally safe to enable.
+	Required for Philips P2000C.
+	********************************************************* -->
+	<selLatch>false</selLatch>
+	<!-- ********************************************************
+	Convert luns to IDs. The unit must already be configured to respond
+	on the ID. Allows dual drives to be accessed from a 
+	XEBEC S1410 SASI bridge.
+	eg. Configured for dual drives as IDs 0 and 1, but the XEBEC will
+	access the second disk as ID0, lun 1.
+	See ttp://bitsavers.trailing-edge.com/pdf/xebec/104524C_S1410Man_Aug83.pdf
+	********************************************************* -->
+	<mapLunsToIds>false</mapLunsToIds>
+	<!-- ********************************************************
+	Delay (in milliseconds) before responding to a SCSI selection.
+	255 (auto) sets it to 0 for SCSI2 hosts and 1ms otherwise.
+	Some samplers need this set to 1 manually.
+	********************************************************* -->
+	<selectionDelay>255</selectionDelay>
+	<!-- ********************************************************
+	Startup delay (in seconds) before responding to the SCSI bus 
+	after power on. Default = 0.
+	********************************************************* -->
+	<startupDelay>0</startupDelay>
+</BoardConfig>
+<SCSITarget id="0">
+	<enabled>true</enabled>
+
+	<!-- ********************************************************
+	Space separated list. Available options:
+	apple		Returns Apple-specific mode pages
+	omti		OMTI host non-standard link control
+	********************************************************* -->
+	<quirks></quirks>
+
+
+	<!-- ********************************************************
+	0x0    Fixed hard drive.
+	0x1    Removable drive.
+	0x2    Optical drive  (ie. CD drive).
+	0x3    1.44MB Floppy Drive.
+	********************************************************* -->
+	<deviceType>0x0</deviceType>
+
+
+	<!-- ********************************************************
+	Device type modifier is usually 0x00. Only change this if your
+	OS requires some special value.
+
+	0x4C    Data General Micropolis disk
+	********************************************************* -->
+	<deviceTypeModifier>0x0</deviceTypeModifier>
+
+
+	<!-- ********************************************************
+	SD card offset, as a sector number (always 512 bytes).
+	********************************************************* -->
+	<sdSectorStart>0</sdSectorStart>
+
+
+	<!-- ********************************************************
+	Drive geometry settings.
+	********************************************************* -->
+
+	<scsiSectors>4194304</scsiSectors>
+	<bytesPerSector>512</bytesPerSector>
+	<sectorsPerTrack>63</sectorsPerTrack>
+	<headsPerCylinder>255</headsPerCylinder>
+
+
+	<!-- ********************************************************
+	Drive identification information. The SCSI2SD doesn't
+	care what these are set to. Use these strings to trick a OS
+	thinking a specific hard drive model is attached.
+	********************************************************* -->
+
+	<!-- 8 character vendor string -->
+	<!-- For Apple HD SC Setup/Drive Setup, use ' SEAGATE' -->
+	<vendor> SEAGATE</vendor>
+
+	<!-- 16 character produce identifier -->
+	<!-- For Apple HD SC Setup/Drive Setup, use '          ST225N' -->
+	<prodId>          ST225N</prodId>
+
+	<!-- 4 character product revision number -->
+	<!-- For Apple HD SC Setup/Drive Setup, use '1.0 ' -->
+	<revision>1.0 </revision>
+
+	<!-- 16 character serial number -->
+	<serial>1234567812345678</serial>
+
+	<!-- Custom mode pages, base64 encoded, up to 1024 bytes.-->
+	<modePages>
+
+	</modePages>
+
+	<!-- Custom inquiry VPD pages, base64 encoded, up to 1024 bytes.-->
+	<vpd>
+
+	</vpd>
+</SCSITarget>
+<SCSITarget id="1">
+	<enabled>true</enabled>
+
+	<!-- ********************************************************
+	Space separated list. Available options:
+	apple		Returns Apple-specific mode pages
+	omti		OMTI host non-standard link control
+	********************************************************* -->
+	<quirks></quirks>
+
+
+	<!-- ********************************************************
+	0x0    Fixed hard drive.
+	0x1    Removable drive.
+	0x2    Optical drive  (ie. CD drive).
+	0x3    1.44MB Floppy Drive.
+	********************************************************* -->
+	<deviceType>0x0</deviceType>
+
+
+	<!-- ********************************************************
+	Device type modifier is usually 0x00. Only change this if your
+	OS requires some special value.
+
+	0x4C    Data General Micropolis disk
+	********************************************************* -->
+	<deviceTypeModifier>0x0</deviceTypeModifier>
+
+
+	<!-- ********************************************************
+	SD card offset, as a sector number (always 512 bytes).
+	********************************************************* -->
+	<sdSectorStart>4194304</sdSectorStart>
+
+
+	<!-- ********************************************************
+	Drive geometry settings.
+	********************************************************* -->
+
+	<scsiSectors>12582912</scsiSectors>
+	<bytesPerSector>512</bytesPerSector>
+	<sectorsPerTrack>63</sectorsPerTrack>
+	<headsPerCylinder>255</headsPerCylinder>
+
+
+	<!-- ********************************************************
+	Drive identification information. The SCSI2SD doesn't
+	care what these are set to. Use these strings to trick a OS
+	thinking a specific hard drive model is attached.
+	********************************************************* -->
+
+	<!-- 8 character vendor string -->
+	<!-- For Apple HD SC Setup/Drive Setup, use ' SEAGATE' -->
+	<vendor> SEAGATE</vendor>
+
+	<!-- 16 character produce identifier -->
+	<!-- For Apple HD SC Setup/Drive Setup, use '          ST225N' -->
+	<prodId>          ST225N</prodId>
+
+	<!-- 4 character product revision number -->
+	<!-- For Apple HD SC Setup/Drive Setup, use '1.0 ' -->
+	<revision>1.0 </revision>
+
+	<!-- 16 character serial number -->
+	<serial>1234567812345678</serial>
+
+	<!-- Custom mode pages, base64 encoded, up to 1024 bytes.-->
+	<modePages>
+
+	</modePages>
+
+	<!-- Custom inquiry VPD pages, base64 encoded, up to 1024 bytes.-->
+	<vpd>
+
+	</vpd>
+</SCSITarget>
+<SCSITarget id="2">
+	<enabled>false</enabled>
+
+	<!-- ********************************************************
+	Space separated list. Available options:
+	apple		Returns Apple-specific mode pages
+	omti		OMTI host non-standard link control
+	********************************************************* -->
+	<quirks></quirks>
+
+
+	<!-- ********************************************************
+	0x0    Fixed hard drive.
+	0x1    Removable drive.
+	0x2    Optical drive  (ie. CD drive).
+	0x3    1.44MB Floppy Drive.
+	********************************************************* -->
+	<deviceType>0x0</deviceType>
+
+
+	<!-- ********************************************************
+	Device type modifier is usually 0x00. Only change this if your
+	OS requires some special value.
+
+	0x4C    Data General Micropolis disk
+	********************************************************* -->
+	<deviceTypeModifier>0x0</deviceTypeModifier>
+
+
+	<!-- ********************************************************
+	SD card offset, as a sector number (always 512 bytes).
+	********************************************************* -->
+	<sdSectorStart>5218304</sdSectorStart>
+
+
+	<!-- ********************************************************
+	Drive geometry settings.
+	********************************************************* -->
+
+	<scsiSectors>4194303</scsiSectors>
+	<bytesPerSector>512</bytesPerSector>
+	<sectorsPerTrack>63</sectorsPerTrack>
+	<headsPerCylinder>255</headsPerCylinder>
+
+
+	<!-- ********************************************************
+	Drive identification information. The SCSI2SD doesn't
+	care what these are set to. Use these strings to trick a OS
+	thinking a specific hard drive model is attached.
+	********************************************************* -->
+
+	<!-- 8 character vendor string -->
+	<!-- For Apple HD SC Setup/Drive Setup, use ' SEAGATE' -->
+	<vendor> SEAGATE</vendor>
+
+	<!-- 16 character produce identifier -->
+	<!-- For Apple HD SC Setup/Drive Setup, use '          ST225N' -->
+	<prodId>          ST225N</prodId>
+
+	<!-- 4 character product revision number -->
+	<!-- For Apple HD SC Setup/Drive Setup, use '1.0 ' -->
+	<revision>1.0 </revision>
+
+	<!-- 16 character serial number -->
+	<serial>1234567812345678</serial>
+
+	<!-- Custom mode pages, base64 encoded, up to 1024 bytes.-->
+	<modePages>
+
+	</modePages>
+
+	<!-- Custom inquiry VPD pages, base64 encoded, up to 1024 bytes.-->
+	<vpd>
+
+	</vpd>
+</SCSITarget>
+<SCSITarget id="3">
+	<enabled>false</enabled>
+
+	<!-- ********************************************************
+	Space separated list. Available options:
+	apple		Returns Apple-specific mode pages
+	omti		OMTI host non-standard link control
+	********************************************************* -->
+	<quirks></quirks>
+
+
+	<!-- ********************************************************
+	0x0    Fixed hard drive.
+	0x1    Removable drive.
+	0x2    Optical drive  (ie. CD drive).
+	0x3    1.44MB Floppy Drive.
+	********************************************************* -->
+	<deviceType>0x0</deviceType>
+
+
+	<!-- ********************************************************
+	Device type modifier is usually 0x00. Only change this if your
+	OS requires some special value.
+
+	0x4C    Data General Micropolis disk
+	********************************************************* -->
+	<deviceTypeModifier>0x0</deviceTypeModifier>
+
+
+	<!-- ********************************************************
+	SD card offset, as a sector number (always 512 bytes).
+	********************************************************* -->
+	<sdSectorStart>0</sdSectorStart>
+
+
+	<!-- ********************************************************
+	Drive geometry settings.
+	********************************************************* -->
+
+	<scsiSectors>4194303</scsiSectors>
+	<bytesPerSector>512</bytesPerSector>
+	<sectorsPerTrack>63</sectorsPerTrack>
+	<headsPerCylinder>255</headsPerCylinder>
+
+
+	<!-- ********************************************************
+	Drive identification information. The SCSI2SD doesn't
+	care what these are set to. Use these strings to trick a OS
+	thinking a specific hard drive model is attached.
+	********************************************************* -->
+
+	<!-- 8 character vendor string -->
+	<!-- For Apple HD SC Setup/Drive Setup, use ' SEAGATE' -->
+	<vendor> codesrc</vendor>
+
+	<!-- 16 character produce identifier -->
+	<!-- For Apple HD SC Setup/Drive Setup, use '          ST225N' -->
+	<prodId>         SCSI2SD</prodId>
+
+	<!-- 4 character product revision number -->
+	<!-- For Apple HD SC Setup/Drive Setup, use '1.0 ' -->
+	<revision> 4.2</revision>
+
+	<!-- 16 character serial number -->
+	<serial>1234567812345678</serial>
+
+	<!-- Custom mode pages, base64 encoded, up to 1024 bytes.-->
+	<modePages>
+
+	</modePages>
+
+	<!-- Custom inquiry VPD pages, base64 encoded, up to 1024 bytes.-->
+	<vpd>
+
+	</vpd>
+</SCSITarget>
+</SCSI2SD>
