@@ -1,29 +1,29 @@
 # aux_sdcard
 A/UX SD card configuration and info
 
-= Requirements =
+# Requirements
 * Functioning A/UX-compatible Mac
 * SCSI2SD
 * Good quality 8GB SD card
 * Good quality SD/USB adapter
 
-= Recommendations = 
+# Recommendations  
 * Newer Mac with USB 3.0
 * Functional old SCSI HDD with Mac OS 7.5.3+
 * Lido
 * LaCie Silverlining
 
-= SD Card image layout = 
+# SD Card image layout 
 The image has two "LUNs":
     * 2GB "drive" with A/UX and a MacPartition for booting
     * 5GB "drive" mounted in A/UX as /opt, that includes a Jagubox mirror and another more recent mirror
 
-= Configuring the SCSIS2SD =
+# Configuring the SCSIS2SD 
 * Ensure the SCSI2SD card has the latest firmware installed.
 * Load the config from scsi2sd_aux_3.1.1-pristine.xml 
 * Verify that the SCSI2SD shows 2 drives
 
-= Deploying the image = 
+# Deploying the image  
 * Decompress the image
 * dd the image to the SD card
 NOTE: I have been unable to get the image to dd properly under Linux. I recommend using a Mac for this part. 
