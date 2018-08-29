@@ -115,16 +115,26 @@ I recommend creating your own user. You will need it if you care to ssh into you
 # Networking
 * Determine a static IP for your system
 
+NOTE: I only have the built-in ethernet interface. If you have another card, you will need to determine its name. 
+
 * Run "newconfig" as root. Follow the prompts, and enter your system's IP info when asked.
 * Reboot.
 
-* Change it in the following files:
+* Change the system IP in the following files:
   * at the end of /etc/networks
   * /etc/hosts
-  * /etc/NETADDRS
+  * /usr/local/etc/sshd_config , for listenAddress
 
 * Determine your default gateway's IP
 * Change it in /etc/rc, for the "route add default" entry
 
 * Determine your nameserver
 * Change it in /etc/resolv.conf
+
+# Enabling SSH
+* Add a non-root user
+* Edit /etc/rc, and uncomment the line at the bottom for starting sshd
+* Reboot, or start sshd manually
+* From another host, ssh yournewuser@yourauxbox
+  * It will always take a long time to authenticate you.
+
