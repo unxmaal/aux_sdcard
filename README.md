@@ -133,6 +133,14 @@ NOTE: I only have the built-in ethernet interface. If you have another card, you
 
 # Enabling SSH
 * Add a non-root user
+
+```adduser -h /users/newusername newusername
+```
+
+* Set a password for the new user
+```passwd newuser
+```
+
 * Edit /etc/rc, and uncomment the line at the bottom for starting sshd
 * Reboot, or start sshd manually
 * From another host, ssh yournewuser@yourauxbox
