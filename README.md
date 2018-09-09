@@ -15,8 +15,8 @@ A/UX SD card configuration and info
 
 # SD Card image layout 
 The image has two "LUNs":
-    * 2GB "drive" with A/UX and a MacPartition for booting
-    * 5GB "drive" mounted in A/UX as /opt, that includes a Jagubox mirror and another more recent mirror
+* 2GB "drive" with A/UX and a MacPartition for booting
+* 5GB "drive" mounted in A/UX as /opt, that includes a Jagubox mirror and another more recent mirror
 
 # Configuring the SCSIS2SD 
 * Ensure the SCSI2SD card has the latest firmware installed.
@@ -146,3 +146,36 @@ NOTE: I only have the built-in ethernet interface. If you have another card, you
 * From another host, ssh yournewuser@yourauxbox
   * It will always take a long time to authenticate you.
 
+# Troubleshooting
+
+## Boot Problems
+You *will* have problems booting this image. 
+
+A/UX-compatible Macs stored certain boot parameters in PRAM. It stored other boot parameters as flags set on volumes. It also stores some boot parameters in a parallel hellscape of hate and rage. 
+
+Here are the steps I've taken to get *my* Quadra 950 to boot. Yours will be different.
+
+### Zap PRAM
+* Power off. 
+* Hold cmd-opt-shift, press the on-keyboard power button, quickly press and hold 'r' before the boot chime. 
+* Keep holding this combo for two chimes
+
+### Force booting off a specific SCSI ID
+* Power off. 
+* Hold cmd-opt-shift, press the on-keyboard power button, quickly press and hold '0' before the boot chime. 
+* This boots SCSI ID 0.
+
+* Power off. 
+* Hold cmd-opt-shift, press the on-keyboard power button, quickly press and hold '1' before the boot chime. 
+* This boots SCSI ID 1.
+
+Your SCSI2SD card shouldn't be at a different ID than 0 or 1, but as you see above, you can select the ID easily.
+
+## Specific examples
+### Unhappy Mac
+Symptom: Black screen with unhappy Mac, error code 000021
+Fix: Force SCSI ID 0, then 1
+
+### Flashing floppy icon
+Symptom: Grey screen with floppy icon
+Fix: Force SCSI ID 0, then 1
