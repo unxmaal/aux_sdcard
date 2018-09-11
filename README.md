@@ -2,9 +2,9 @@
 A/UX SD card configuration and info
 
 # Requirements
-* Functioning A/UX-compatible Mac
-* SCSI2SD
-* Good quality 8GB SD card
+* Functioning A/UX-compatible Mac (reference http://www.aux-penelope.com/hardware.htm for supported hardware)
+* SCSI2SD (v5 or v5.1 are recommended)
+* Good quality 8GB microSD card
 * Good quality SD/USB adapter
 
 # Recommendations  
@@ -117,7 +117,7 @@ I recommend creating your own user. You will need it if you care to ssh into you
 
 NOTE: I only have the built-in ethernet interface. If you have another card, you will need to determine its name. 
 
-* Run "newconfig" as root. Follow the prompts, and enter your system's IP info when asked.
+* Run "newconfig" as root. Follow the prompts, and enter your system's IP info when asked. If you have a separate networking card (i.e., an Apple "SONIC" NuBus Ethernet Card) and it's compatible/recognized, you will see interfaces ao0 (built-in Ethernet), as0, as1, etc. Make note of the correct interface to be configured and enabled at boot.   
 * Reboot.
 
 * Change the system IP in the following files:
@@ -172,6 +172,9 @@ Here are the steps I've taken to get *my* Quadra 950 to boot. Yours will be diff
 * This boots SCSI ID 1.
 
 Your SCSI2SD card shouldn't be at a different ID than 0 or 1, but as you see above, you can select the ID easily.
+
+### Boot off of floppy disk to set Startup Disk
+A Floppy Emu with a System 7 version of "Disk Tools.img" or a regular bootable floppy can serve as a failsafe to get you to Control Panel, where you can manually run Startup Disk or Disk First Aid if there's a bigger problem. (like if you got your SD card out of the clearance bin at Discount Auto Parts) 
 
 ## Specific examples
 ### Unhappy Mac
