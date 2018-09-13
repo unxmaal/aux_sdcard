@@ -6,6 +6,7 @@ A/UX SD card configuration and info
 * SCSI2SD
 * Good quality 8GB SD card
 * Good quality SD/USB adapter
+* SD Card Image: https://mega.nz/#!1bRymCDA!_eLKv-P51nd18Hmav4rUzY0jsbbXJBDayarLkVxUA1A
 
 # Recommendations  
 * Newer Mac with USB 3.0
