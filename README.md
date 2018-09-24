@@ -12,8 +12,6 @@ A/UX SD card configuration and info
 * Functional old SCSI HDD with Mac OS 7.5.3+
 * Lido
 * LaCie Silverlining
-* You *might* be more comfortable working with a GUI to write the microSD image; you can grab ApplePi-Baker from https://www.tweaking4all.com/software/macosx-software/macosx-apple-pi-baker/ if you prefer. 
-* If you do, skip down to the bottom section called "Using ApplePi-Baker" instead of the commandline (```dd```) to write the disk image
 
 # SD Card image layout 
 The image has two "LUNs":
@@ -21,17 +19,35 @@ The image has two "LUNs":
 * 5GB "drive" mounted in A/UX as /opt, that includes a Jagubox mirror and another more recent mirror
 
 # Configuring the SCSIS2SD 
-* Ensure the SCSI2SD card has the latest firmware installed.
-* Load the config from scsi2sd_aux_3.1.1-pristine.xml 
-* Verify that the SCSI2SD shows 2 drives
+* You also need the `scsi2sd_aux_3.1.1-pristine.xml` file that is in the GitHub repo so download/save that as well.
 
-# Deploying the image  
+* Go here (http://www.codesrc.com/mediawiki/index.php/SCSI2SD) and scroll down to "Files" to download the correct scsi2sd-util.dmg for the version of the card you have (i.e., you need either SCSI2SD v5, 5.1 or 6)
+
+  * SCSI2SD v5/5.1: [http://www.codesrc.com/files/scsi2sd/latest/mac/scsi2sd-util.dmg](http://www.codesrc.com/files/scsi2sd/latest/mac/scsi2sd-util.dmg)
+  * SCSI2SD v6: [http://www.codesrc.com/files/scsi2sd-v6/latest/mac/scsi2sd-util6.dmg](http://www.codesrc.com/files/scsi2sd-v6/latest/mac/scsi2sd-util6.dmg)
+  * Quick Start Guide: [http://www.codesrc.com/mediawiki/index.php/SCSI2SD_UserManual](http://www.codesrc.com/mediawiki/index.php/SCSI2SD_UserManual)
+* Open DMG and drag `scsi2sd-util` application somewhere (Desktop, Downloads, etc)
+* Open Terminal
+* Drag `scsi2sd-util` and drop into Terminal window, then press Return to launch (or you could manually type the full path to the scsi2sd-util application)
+* Connect SCSI2SD to Mac via micro-USB cable and `scsi2sd-util`` GUI should indicate the card was recognized (via the bottom status bar)
+* Select File menu -> Open file...
+* Browse to directory where you saved `scsi2sd_aux_3.1.1-pristine.xml`
+* Click "Save to device" button and XML configuration (SCSI settings, microSD card partition offsets, etc) will write to the hardware - DO NOT DISTURB, this process takes a few seconds and you will see the amber LED on the card blink w/ read/write activity
+* Ensure the SCSI2SD card has the latest firmware installed per the bottom status bar. Current firmware is [here](http://www.codesrc.com/files/scsi2sd/latest/firmware/) for v5/5.1 and [here](http://www.codesrc.com/files/scsi2sd-v6/latest/firmware.dfu) for v6.
+* I personally wouldn't bother with checking the firmware (since it's a manual, multi-step process) unless you bought your hardware before 2018 
+* When complete, disconnect SCSI2SD from micro-USB
+* Verify that the SCSI2SD shows 2 drives are enabled
+
+# Deploying the image (using dd)
+* You *might* be more comfortable working with a GUI to write the microSD image; you can grab ApplePi-Baker from https://www.tweaking4all.com/software/macosx-software/macosx-apple-pi-baker/ if you prefer. 
+
+  If you do, skip down to the section called "Deploying the image (using ApplePi-Baker)" to write the disk image.
 * Decompress the image
-* dd the image to the SD card
-NOTE: I have been unable to get the image to dd properly under Linux. I recommend using a Mac for this part. 
+* `dd` the image to the SD card
+NOTE: I have been unable to get the image to `dd` properly under Linux. I recommend using a Mac for this part. 
 
 * In Terminal.app, run ```diskutil list``` 
-* Note the highest-numbered disk name. It'll be something like "/dev/disk4".
+* Note the highest-numbered disk name. It'll be something like `/dev/disk4`.
 * Insert the SD card into your USB/SD adapter, and connect the adapter to your Mac.
 * In Terminal.app, run ```diskutil list``` again.
 * Note the highest-numbered disk name. It should have changed.
@@ -47,7 +63,22 @@ You'll set the output file to be "r" plus the name of the SD card. This tells OS
 
 ```sudo dd if=aux_3.1.1_working.img of=/dev/r<your disk name>```
 
-* Verify the SD card's partitioning
+# Deploying the image (using ApplePi-Baker)
+* Grab latest DMG from [https://www.tweaking4all.com/software/macosx-software/macosx-apple-pi-baker/](https://www.tweaking4all.com/software/macosx-software/macosx-apple-pi-baker/), open and drag application to /Applications
+* Launch and ignore any compatibility warnings ("needs to be updated") related to macOS 10.14 "Mojave"
+* Replace the first 90% of the above **"Deploying the image"** section with:
+* Insert microSD card into USB card reader, SD card adapter, etc
+* Launch ApplePi-Baker and enter admin password (sudo)
+* Select removable drive/microSD card on left-side window (e.g., ``/dev/disk3`` but this will vary so make sure all USB drives, etc besides the SD card are disconnected)
+* From the right-side window (*"Pi-ingredients: IMG Recipe"*):
+* Click on ... button to browse HD and select IMG file you downloaded from the above GitHub link  
+* Full path to image file will populate text field
+* Click on Restore Backup. 
+* Go make dinner; this will take a while (at least 30 minutes; in some cases, much longer) 
+* Take note of the microSD card's device name (`/dev/diskX`, where `X` is a number) from the left-side window in ApplePi-Baker. You'll use this for the next section.
+
+
+# Verify the SD card's partitioning
 
 ```diskutil list```
 
@@ -186,20 +217,3 @@ Fix: Force SCSI ID 0, then 1
 ### Flashing floppy icon
 Symptom: Grey screen with floppy icon
 Fix: Force SCSI ID 0, then 1
-
-# Appendix
-
-### Using the ApplePi-Baker GUI instead of 'dd'
-* Grab latest DMG from https://www.tweaking4all.com/software/macosx-software/macosx-apple-pi-baker/, open and drag application to /Applications
-* Launch and ignore any compatibility warnings ("needs to be updated") related to macOS 10.14 "Mojave"
-* Replace the first 90% of the above **"Deploying the image"** section with:
-* Insert microSD card into USB card reader, SD card adapter, etc
-* Launch ApplePi-Baker and enter admin password (sudo)
-* Select removable drive/microSD card on left-side window (e.g., /dev/disk3 but this will vary so make sure all USB drives, etc besides the SD card are disconnected)
-* From the right-side window (*"Pi-ingredients: IMG Recipe"*):
-* Click on ... button to browse HD and select IMG file you downloaded from the above GitHub link  
-* Full path to image file will populate text field
-* Click on Restore Backup. 
-* Go make dinner; this will take a while (at least 30 minutes; in some cases, much longer) 
-* Go back to the **"Deploying the image"** section of the GitHub README and skip down to the section called "Verify the SD card's partitioning" (i.e., where it says to type ```diskutil list```
-* Follow the remainder of the steps from this point forward, taking the device name (/dev/diskx, where x is a number) from the left-side window in ApplePi-Baker.
