@@ -29,7 +29,7 @@ The image has two "LUNs":
 * Open DMG and drag `scsi2sd-util` application somewhere (Desktop, Downloads, etc)
 * Open Terminal
 * Drag `scsi2sd-util` and drop into Terminal window, then press Return to launch (or you could manually type the full path to the scsi2sd-util application)
-* Connect SCSI2SD to Mac via micro-USB cable and `scsi2sd-util`` GUI should indicate the card was recognized (via the bottom status bar)
+* Connect SCSI2SD to Mac via micro-USB cable and the `scsi2sd-util` GUI should then connect and indicate the card was recognized (via the bottom status bar)
 * Select File menu -> Open file...
 * Browse to directory where you saved `scsi2sd_aux_3.1.1-pristine.xml`
 * Click "Save to device" button and XML configuration (SCSI settings, microSD card partition offsets, etc) will write to the hardware - DO NOT DISTURB, this process takes a few seconds and you will see the amber LED on the card blink w/ read/write activity
