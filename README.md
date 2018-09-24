@@ -12,6 +12,8 @@ A/UX SD card configuration and info
 * Functional old SCSI HDD with Mac OS 7.5.3+
 * Lido
 * LaCie Silverlining
+* You *might* be more comfortable working with a GUI to write the microSD image; you can grab ApplePi-Baker from https://www.tweaking4all.com/software/macosx-software/macosx-apple-pi-baker/ if you prefer. 
+* If you do, skip down to the bottom section called "Using ApplePi-Baker" instead of the commandline (```dd```) to write the disk image
 
 # SD Card image layout 
 The image has two "LUNs":
@@ -184,3 +186,20 @@ Fix: Force SCSI ID 0, then 1
 ### Flashing floppy icon
 Symptom: Grey screen with floppy icon
 Fix: Force SCSI ID 0, then 1
+
+# Appendix
+
+### Using the ApplePi-Baker GUI instead of 'dd'
+* Grab latest DMG from https://www.tweaking4all.com/software/macosx-software/macosx-apple-pi-baker/, open and drag application to /Applications
+* Launch and ignore any compatibility warnings ("needs to be updated") related to macOS 10.14 "Mojave"
+* Replace the first 90% of the above **"Deploying the image"** section with:
+* Insert microSD card into USB card reader, SD card adapter, etc
+* Launch ApplePi-Baker and enter admin password (sudo)
+* Select removable drive/microSD card on left-side window (e.g., /dev/disk3 but this will vary so make sure all USB drives, etc besides the SD card are disconnected)
+* From the right-side window (*"Pi-ingredients: IMG Recipe"*):
+* Click on ... button to browse HD and select IMG file you downloaded from the above GitHub link  
+* Full path to image file will populate text field
+* Click on Restore Backup. 
+* Go make dinner; this will take a while (at least 30 minutes; in some cases, much longer) 
+* Go back to the **"Deploying the image"** section of the GitHub README and skip down to the section called "Verify the SD card's partitioning" (i.e., where it says to type ```diskutil list```
+* Follow the remainder of the steps from this point forward, taking the device name (/dev/diskx, where x is a number) from the left-side window in ApplePi-Baker.
